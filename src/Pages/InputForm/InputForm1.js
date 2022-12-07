@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-const InputForm = () => {
+const InputForm1 = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
     return (
-        <div className='md:w-1/2 mx-auto mt-10 card shadow-2xl bg-base-100 p-10'>
-            <h1 className='text-3xl font-bold'>ABC Engine Prototype</h1>
+        <div className='md:w-1/2 mx-auto mt-6 card shadow-2xl bg-base-100 p-10'>
+            <h1 className='text-3xl font-bold text-center'>ABC Engine Prototype</h1>
+            <p className='text-xl font-semibold text-center mt-6'>Input Project Details</p>
             <form >
                 <div className="form-control">
                     <label className="label">
@@ -44,7 +45,7 @@ const InputForm = () => {
                     {errors.contractor && <p className='text-red-500'>{errors.contractor.message}</p>}
                 </div>
                 <div className="form-control">
-                    <button type='submit' className="btn btn-accent text-white mt-6">Submit</button>
+                    <button type='submit' className="btn btn-accent text-white mt-6">Next</button>
                     {error && <p className='text-red-500'>{setError}</p>}
                 </div>
             </form>
@@ -52,4 +53,4 @@ const InputForm = () => {
     );
 };
 
-export default InputForm;
+export default InputForm1;

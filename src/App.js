@@ -1,12 +1,11 @@
-import logo from './logo.svg';
+
 import './App.css';
-import InputForm from './Pages/InputForm/InputForm';
+import { RouterProvider } from 'react-router-dom'
+import routes from './Router/Routes';
 
 function App() {
   return (
-    <div className="App">
-      <InputForm></InputForm>
-    </div>
+    <RouterProvider router={routes}></RouterProvider>
   );
 }
 
