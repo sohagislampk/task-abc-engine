@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { contextData } from '../../Context/ContextProvider';
+import { Navigate } from 'react-router-dom';
 const InputFrom2 = () => {
+    const { formData } = useContext(contextData);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
+    if (formData === null) {
+        return <Navigate to={'/'}></Navigate>
+    }
+    console.log(formData.client);
     return (
+
         <div className='md:w-1/2 mx-auto my-10 card shadow-2xl bg-base-100 px-10 pb-10 pt-4'>
             <p className='text-xl font-bold text-center'>Input Data</p>
             <form >
@@ -11,7 +20,7 @@ const InputFrom2 = () => {
                     <label className="label">
                         <span className="label-text">Project Name</span>
                     </label>
-                    <input type="text" placeholder="project name" {...register("projectName", {
+                    <input type="text" defaultValue={formData.projectName} disabled {...register("projectName", {
                         required: "Project Name is Required"
                     })} className="input input-bordered" />
                     {errors.projectName && <p className='text-red-500'>{errors.projectName.message}</p>}
@@ -20,7 +29,7 @@ const InputFrom2 = () => {
                     <label className="label">
                         <span className="label-text">Project Description</span>
                     </label>
-                    <input type="text" placeholder="project description" {...register("projectDescription", {
+                    <input type="text" defaultValue={formData.projectDescription} disabled  {...register("projectDescription", {
                         required: "Project Description is Required"
                     })} className="input input-bordered" />
                     {errors.projectDescription && <p className='text-red-500'>{errors.projectDescription.message}</p>}
@@ -29,7 +38,7 @@ const InputFrom2 = () => {
                     <label className="label">
                         <span className="label-text">Client</span>
                     </label>
-                    <input type="text" placeholder="client" {...register("client", {
+                    <input type="text" defaultValue={formData.client} disabled  {...register("client", {
                         required: "Client is Required"
                     })} className="input input-bordered" />
                     {errors.client && <p className='text-red-500'>{errors.client.message}</p>}
@@ -38,7 +47,7 @@ const InputFrom2 = () => {
                     <label className="label">
                         <span className="label-text">Contractor</span>
                     </label>
-                    <input type="text" placeholder="contractor" {...register("client", {
+                    <input type="text" defaultValue={formData.contractor} disabled  {...register("client", {
                         required: "Contractor is Required"
                     })} className="input input-bordered" />
                     {errors.contractor && <p className='text-red-500'>{errors.contractor.message}</p>}

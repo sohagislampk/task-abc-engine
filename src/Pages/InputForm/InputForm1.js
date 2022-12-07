@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { contextData } from '../../Context/ContextProvider';
+
 const InputForm1 = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { setFormData } = useContext(contextData);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const handleInput = (data) => {
+        setError('')
+        setFormData(data);
+        navigate('/inputform2')
+
+    }
     return (
         <div className='md:w-1/2 mx-auto mt-6 card shadow-2xl bg-base-100 p-10'>
             <h1 className='text-3xl font-bold text-center'>ABC Engine Prototype</h1>
             <p className='text-xl font-semibold text-center mt-6'>Input Project Details</p>
-            <form >
+            <form onSubmit={handleSubmit(handleInput)} >
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Project Name</span>
@@ -39,14 +50,14 @@ const InputForm1 = () => {
                     <label className="label">
                         <span className="label-text">Contractor</span>
                     </label>
-                    <input type="text" placeholder="contractor" {...register("client", {
+                    <input type="text" placeholder="contractor" {...register("contractor", {
                         required: "Contractor is Required"
                     })} className="input input-bordered" />
                     {errors.contractor && <p className='text-red-500'>{errors.contractor.message}</p>}
                 </div>
                 <div className="form-control">
                     <button type='submit' className="btn btn-accent text-white mt-6">Next</button>
-                    {error && <p className='text-red-500'>{setError}</p>}
+                    {error && <p className='text-red-500'>{error}</p>}
                 </div>
             </form>
         </div>
